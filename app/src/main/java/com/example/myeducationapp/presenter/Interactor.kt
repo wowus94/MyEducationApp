@@ -1,8 +1,8 @@
 package com.example.myeducationapp.presenter
 
-import java.util.*
+import io.reactivex.Observable
 
 interface Interactor<T> {
 
-    fun getData(word: String, fromRemoteSource: Boolean): Observable
+    fun getData(word: String, fromRemoteSource: Boolean): Observable<T>
 }

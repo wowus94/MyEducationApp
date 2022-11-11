@@ -1,8 +1,8 @@
-package com.example.myeducationapp.repository
+package com.example.myeducationapp.datasource
 
 import io.reactivex.Observable
 
-interface Repository<T> {
+interface DataSource<T> {
 
     fun getData(word: String): Observable<T>
 }
