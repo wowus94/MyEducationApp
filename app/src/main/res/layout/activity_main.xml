@@ -13,16 +13,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_activity_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/color_background" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/search_fab"
-            android:layout_width="wrap_content"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/search_bt"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            android:layout_marginStart="@dimen/margin_medium"
             android:layout_marginEnd="@dimen/margin_medium"
             android:layout_marginBottom="@dimen/margin_medium"
-            android:src="@drawable/ic_search" />
+            android:text="@string/search_word" />
     </FrameLayout>
 
     <FrameLayout

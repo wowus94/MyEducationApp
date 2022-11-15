@@ -2,8 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_dialog_layout"
     android:layout_width="match_parent"
-    android:layout_height="205dp"
+    android:layout_height="@dimen/height_search_dialog_fr"
     android:layout_marginBottom="@dimen/margin_medium"
+    android:background="@color/color_background"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -44,6 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|end"
             android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/iv_clear_text_margin_end"
+            android:layout_marginBottom="@dimen/iv_clear_text_margin_bottom"
             android:contentDescription="@string/delete_description"
             android:src="@drawable/ic_delete_text"
             android:visibility="visible"
