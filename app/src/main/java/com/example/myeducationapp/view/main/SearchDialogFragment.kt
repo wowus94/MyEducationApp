@@ -1,4 +1,4 @@
-package com.example.myeducationapp.main.adapter
+package com.example.myeducationapp.view.main
 
 import android.os.Bundle
 import android.text.Editable

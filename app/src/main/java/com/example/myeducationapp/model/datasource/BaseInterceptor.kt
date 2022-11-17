@@ -1,4 +1,4 @@
-package com.example.myeducationapp.datasource
+package com.example.myeducationapp.model.data.datasource
 
 import okhttp3.Interceptor
 import okhttp3.Response

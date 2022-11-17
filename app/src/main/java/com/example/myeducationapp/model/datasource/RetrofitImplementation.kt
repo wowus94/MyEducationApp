@@ -1,4 +1,4 @@
-package com.example.myeducationapp.datasource
+package com.example.myeducationapp.model.data.datasource
 
 import com.example.myeducationapp.model.data.DataModel
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

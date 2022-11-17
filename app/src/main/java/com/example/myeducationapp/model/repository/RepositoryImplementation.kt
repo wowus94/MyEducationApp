@@ -1,6 +1,6 @@
-package com.example.myeducationapp.repository
+package com.example.myeducationapp.model.repository
 
-import com.example.myeducationapp.datasource.DataSource
+import com.example.myeducationapp.model.data.datasource.DataSource
 import com.example.myeducationapp.model.data.DataModel
 import io.reactivex.Observable
 

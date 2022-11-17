@@ -1,4 +1,4 @@
-package com.example.myeducationapp.datasource
+package com.example.myeducationapp.model.data.datasource
 
 import io.reactivex.Observable
 

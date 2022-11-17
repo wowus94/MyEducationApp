@@ -1,9 +1,9 @@
-package com.example.myeducationapp.main
+package com.example.myeducationapp.view.main
 
 import com.example.myeducationapp.model.data.AppState
 import com.example.myeducationapp.model.data.DataModel
-import com.example.myeducationapp.presenter.Interactor
-import com.example.myeducationapp.repository.Repository
+import com.example.myeducationapp.viewmodel.Interactor
+import com.example.myeducationapp.model.repository.Repository
 
 class MainInteractor(
     private val remoteRepository: Repository<List<DataModel>>,

@@ -1,4 +1,4 @@
-package com.example.myeducationapp.repository
+package com.example.myeducationapp.model.repository
 
 import io.reactivex.Observable
 
