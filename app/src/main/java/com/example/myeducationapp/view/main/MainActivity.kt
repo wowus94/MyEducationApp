@@ -16,7 +16,6 @@ import com.example.myeducationapp.view.main.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
-
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
@@ -24,12 +23,19 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         View.OnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
-            searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
+            searchDialogFragment.show(
+                supportFragmentManager,
+                BOTTOM_SHEET_FRAGMENT_DIALOG_TAG
+            )
         }
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
+
+                Toast.makeText(
+                    this@MainActivity, data.text,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
@@ -48,7 +54,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initViewModel()
         initViews()
     }
@@ -60,7 +65,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 val data = appState.data
                 if (data.isNullOrEmpty()) {
                     showAlertDialog(
-                        getString(R.string.dialog_tittle_sorry),
+                        getString(R.string.dialog_title_sorry),
                         getString(R.string.empty_server_response_on_success)
                     )
                 } else {
@@ -80,27 +85,28 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
             }
             is AppState.Error -> {
                 showViewWorking()
-                showAlertDialog(getString(R.string.error_stub), appState.error.message)
+                showAlertDialog(
+                    getString(R.string.error_stub),
+                    appState.error.message
+                )
             }
         }
     }
 
     private fun initViewModel() {
         if (binding.mainActivityRecyclerview.adapter != null) {
-            throw IllegalStateException(getString(R.string.text_initialised_vm))
+            throw IllegalStateException("The ViewModel should be initialised first")
         }
-
         val viewModel: MainViewModel by viewModel()
         model = viewModel
         model.subscribe().observe(this@MainActivity, { renderData(it) })
-
     }
 
     private fun initViews() {
         binding.searchBt.setOnClickListener(fabClickListener)
-        binding.mainActivityRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
+        binding.mainActivityRecyclerview.layoutManager =
+            LinearLayoutManager(applicationContext)
         binding.mainActivityRecyclerview.adapter = adapter
-
     }
 
     private fun showViewWorking() {
