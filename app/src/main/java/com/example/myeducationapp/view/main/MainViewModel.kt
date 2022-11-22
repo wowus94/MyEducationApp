@@ -6,10 +6,9 @@ import com.example.myeducationapp.utils.parseSearchResults
 import com.example.myeducationapp.viewmodel.BaseViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
-import javax.inject.Inject
 
 
-class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+class MainViewModel(private val interactor: MainInteractor) :
     BaseViewModel<AppState>() {
 
     private var appState: AppState? = null
