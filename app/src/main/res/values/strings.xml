@@ -18,4 +18,5 @@
     </string>
     <string name="dialog_title_sorry">Sorry</string>
     <string name="text_initialised_vm">The ViewModel should be initialised first</string>
+    <string name="text_activity_description">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>

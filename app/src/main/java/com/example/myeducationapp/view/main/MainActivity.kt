@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myeducationapp.R
 import com.example.myeducationapp.databinding.ActivityMainBinding
 import com.example.myeducationapp.model.data.AppState
 import com.example.myeducationapp.model.data.DataModel
+import com.example.myeducationapp.utils.convertMeaningsToString
 import com.example.myeducationapp.utils.isOnline
 import com.example.myeducationapp.view.base.BaseActivity
+import com.example.myeducationapp.view.descriptionscreen.DescriptionActivity
 import com.example.myeducationapp.view.main.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
+
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
@@ -23,19 +26,19 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         View.OnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
             searchDialogFragment.setOnSearchClickListener(onSearchClickListener)
-            searchDialogFragment.show(
-                supportFragmentManager,
-                BOTTOM_SHEET_FRAGMENT_DIALOG_TAG
-            )
+            searchDialogFragment.show(supportFragmentManager, BOTTOM_SHEET_FRAGMENT_DIALOG_TAG)
         }
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-
-                Toast.makeText(
-                    this@MainActivity, data.text,
-                    Toast.LENGTH_SHORT
-                ).show()
+                startActivity(
+                    DescriptionActivity.getIntent(
+                        this@MainActivity,
+                        data.text!!,
+                        convertMeaningsToString(data.meanings!!),
+                        data.meanings[0].imageUrl
+                    )
+                )
             }
         }
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
@@ -54,7 +57,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initViewModel()
+        iniViewModel()
         initViews()
     }
 
@@ -85,27 +88,23 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
             }
             is AppState.Error -> {
                 showViewWorking()
-                showAlertDialog(
-                    getString(R.string.error_stub),
-                    appState.error.message
-                )
+                showAlertDialog(getString(R.string.error_stub), appState.error.message)
             }
         }
     }
 
-    private fun initViewModel() {
+    private fun iniViewModel() {
         if (binding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
         val viewModel: MainViewModel by viewModel()
         model = viewModel
-        model.subscribe().observe(this@MainActivity, { renderData(it) })
+        model.subscribe().observe(this@MainActivity, Observer<AppState> { renderData(it) })
     }
 
     private fun initViews() {
         binding.searchBt.setOnClickListener(fabClickListener)
-        binding.mainActivityRecyclerview.layoutManager =
-            LinearLayoutManager(applicationContext)
+        binding.mainActivityRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
         binding.mainActivityRecyclerview.adapter = adapter
     }
 
